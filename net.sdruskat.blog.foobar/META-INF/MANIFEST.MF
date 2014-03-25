@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test for textselection-dependent popup menus
+Bundle-SymbolicName: net.sdruskat.blog.foobar.textselection.popupmenu;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: net.sdruskat.blog.foobar.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.expressions;bundle-version="3.4.500",
+ org.eclipse.jface.text;bundle-version="3.8.101"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
