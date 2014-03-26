@@ -1,28 +1,35 @@
 package net.sdruskat.blog.foobar.propertytesters;
 
-import java.util.Collection;
+import net.sdruskat.blog.foobar.FoobarView;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 
 public class SelectionTester extends PropertyTester {
 
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-	    if ("hasNonEmptyTextSelection".equals(property)) {
-	        if (receiver instanceof Collection) {
-	            @SuppressWarnings("unchecked")
-	            Collection<Object> receiverCollection = (Collection<Object>) receiver;
-	            TextSelection selection;
-	            if (receiverCollection.toArray().length != 0 && receiverCollection.toArray()[0] instanceof TextSelection)  {
-	            	selection = (TextSelection) receiverCollection.toArray()[0];
-	                if (!selection.getText().equals("")) {
-	                	return true;
-	                }
-	            }
-	        }
-	    }
-	    return false;
+		if ("hasNonEmptyTextSelection".equals(property)) {
+			try {
+				IWorkbenchPart activePart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart();
+				if (activePart instanceof FoobarView) {
+					FoobarView view = (FoobarView) activePart;
+					ISelection viewSiteSelection = view.getViewSite().getSelectionProvider().getSelection();
+					if (viewSiteSelection instanceof TextSelection) {
+						TextSelection textSelection = (TextSelection) viewSiteSelection;
+						if (!textSelection.getText().isEmpty()) {
+							return true;
+						}
+					}
+				}
+			} catch (Exception e) {
+				// Do nothing. Will throw an NPE when the application is closed as there is no longer an active part.
+			}
+		}
+		return false;
 	}
 
 }
