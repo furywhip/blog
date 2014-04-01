@@ -6,6 +6,7 @@ import net.sdruskat.randomcolours.RandomRGBGenerator;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
@@ -13,10 +14,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 /**
+ * Demonstrates the usage of {@link RandomRGBGenerator} by creating
+ * a number of {@link Label}s with randomly generated {@link RGB}-based {@link Color}s.
  * 
- */
-
-/**
  * @author Stephan Druskat
  *
  */
