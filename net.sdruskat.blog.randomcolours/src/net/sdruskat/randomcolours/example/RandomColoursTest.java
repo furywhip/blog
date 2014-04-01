@@ -1,6 +1,8 @@
-package net.sdruskat.blog.randomcolours;
+package net.sdruskat.randomcolours.example;
 
 import java.util.Random;
+
+import net.sdruskat.randomcolours.RandomRGBGenerator;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -57,17 +59,18 @@ public class RandomColoursTest {
 		Label mainLabel = new Label(shell, SWT.NONE);
 		mainLabel.setLayoutData(gridData);
 		mainLabel.setText(randomType.substring(0, 3));
+		RandomRGBGenerator gen = new RandomRGBGenerator();
 		for (int i = 0; i < alphabet.length; i++) {
 			Label label = new Label(shell, SWT.CENTER);
 			float h = new Random().nextFloat();
 			if (randomType == RandomColoursTest.SIMPLE_RANDOM) {
-				label.setBackground(new Color(display, RandomRGBGenerator.simpleRandomRgb()));
+				label.setBackground(new Color(display, gen.simpleRandomRgb()));
 			}
 			else if (randomType == RandomColoursTest.RANDOM_HSV) {
-				label.setBackground(new Color(display, RandomRGBGenerator.hsvToRgb(h, 0.99f, 0.95f)));
+				label.setBackground(new Color(display, gen.hsvToRgb(h, 0.99f, 0.95f)));
 			}
 			else if (randomType == RandomColoursTest.GOLDEN_RATIO_HSV) {
-				label.setBackground(new Color(display, RandomRGBGenerator.goldenRatioHsvToRgb(h, 0.99f, 0.95f)));
+				label.setBackground(new Color(display, gen.goldenRatioHsvToRgb(h, 0.99f, 0.99f)));
 			}
 			gridData.heightHint = 30;
 			gridData.widthHint = 30;

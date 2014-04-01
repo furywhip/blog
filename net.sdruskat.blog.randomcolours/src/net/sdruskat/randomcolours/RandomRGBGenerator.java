@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sdruskat.blog.randomcolours;
+package net.sdruskat.randomcolours;
 
 import java.util.Random;
 import org.eclipse.swt.graphics.RGB;
@@ -29,10 +29,10 @@ import org.eclipse.swt.graphics.RGB;
  * @author Stephan Druskat
  * 
  */
-public abstract class RandomRGBGenerator {
+public class RandomRGBGenerator {
 	
 	/**
-	 * Default float for the hue value, tested against in {@link net.sdruskat.blog.randomcolours.RandomRGBGenerator#calculateGoldenRatioHue(float)}.
+	 * Default float for the hue value, tested against in {@link net.sdruskat.randomcolours.RandomRGBGenerator#calculateGoldenRatioHue(float)}.
 	 */
 	private static float goldenRatioFloatForH = -1;
 	
@@ -42,7 +42,7 @@ public abstract class RandomRGBGenerator {
 	 * @param h The hue float that is tested against the default float and used for hue randomization. This should be a {@link Random#nextFloat()}. 
 	 * @return A float that is golden ratio-spaced to the last calculated float.
 	 */
-	private static float calculateGoldenRatioHue(float h) {
+	private float calculateGoldenRatioHue(float h) {
 		double goldenRatioConjugate = 0.618033988749895;
 		if (goldenRatioFloatForH  == -1) {
 			goldenRatioFloatForH = h;
@@ -63,7 +63,7 @@ public abstract class RandomRGBGenerator {
 	 * @param v A float representing perceived luminance
 	 * @return An {@link RGB} object, golden ratio-space randomized on hue.
 	 */
-	public static RGB goldenRatioHsvToRgb(float h, float s, float v) {
+	public RGB goldenRatioHsvToRgb(float h, float s, float v) {
 		float goldenRatioH = calculateGoldenRatioHue(h);
 		return hsvToRgb(goldenRatioH, s, v);
 	}
@@ -72,7 +72,7 @@ public abstract class RandomRGBGenerator {
 	 * Creates an {@link RGB} object, simply randomized by passing Random().nextInt(256) to its constructor thrice.
 	 * @return An {@link RGB} object based on simply (pseudo-) randomized ints.
 	 */
-	public static RGB simpleRandomRgb() {
+	public RGB simpleRandomRgb() {
 		return new RGB(new Random().nextInt(256), new Random().nextInt(256), new Random().nextInt(256));
 	}
 
@@ -84,7 +84,7 @@ public abstract class RandomRGBGenerator {
 	 * @param v A float representing perceived luminance
 	 * @return An {@link RGB} object which is visually as close as possible to the passed-in HSV values.
 	 */
-	public static RGB hsvToRgb(float h, float s, float v) {
+	public RGB hsvToRgb(float h, float s, float v) {
 		int h_i = (int)(h * 6);
 		float f = (h * 6) - h_i;
 		float p = v * (1 - s);
