@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
  * @author Stephan Druskat
  *
  */
-public class RandomColorsTest {
+public class RandomColoursTest {
 	
 	private static final String SIMPLE_RANDOM = "Simple random float";
 	private static final String RANDOM_HSV = "Random Hue float (HSV)";
@@ -45,9 +45,9 @@ public class RandomColorsTest {
 		
 		gridData = new GridData();
 		
-		produceLabels(gridData, RandomColorsTest.SIMPLE_RANDOM);
-		produceLabels(gridData, RandomColorsTest.RANDOM_HSV);
-		produceLabels(gridData, RandomColorsTest.GOLDEN_RATIO_HSV);
+		produceLabels(gridData, RandomColoursTest.SIMPLE_RANDOM);
+		produceLabels(gridData, RandomColoursTest.RANDOM_HSV);
+		produceLabels(gridData, RandomColoursTest.GOLDEN_RATIO_HSV);
 		
 		shell.pack();
 		shell.open();
@@ -67,14 +67,14 @@ public class RandomColorsTest {
 		float h = -1, s = 0.99f, v = 0.95f;
 		for (int i = 0; i < alphabet.length; i++) {
 			Label label = new Label(shell, SWT.CENTER);
-			if (randomType == RandomColorsTest.SIMPLE_RANDOM) {
+			if (randomType == RandomColoursTest.SIMPLE_RANDOM) {
 				label.setBackground(new Color(display, simpleRandomRgb()));
 			}
-			else if (randomType == RandomColorsTest.RANDOM_HSV) {
+			else if (randomType == RandomColoursTest.RANDOM_HSV) {
 				h = new Random().nextFloat();
 				label.setBackground(new Color(display, hsvToRgb(h, s, v)));
 			}
-			else if (randomType == RandomColorsTest.GOLDEN_RATIO_HSV) {
+			else if (randomType == RandomColoursTest.GOLDEN_RATIO_HSV) {
 				h = calculateGoldenRatioHue(originalRandomFloat);
 				label.setBackground(new Color(display, hsvToRgb(h, s, v)));
 			}
