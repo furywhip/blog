@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sdruskat.randomcolours.example;
+package net.sdruskat.blog.randomcolours.example;
 
 import java.util.Random;
 
-import net.sdruskat.randomcolours.RandomRGBGenerator;
+import net.sdruskat.blog.randomcolours.RandomRGBGenerator;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;

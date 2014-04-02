@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.sdruskat.randomcolours;
+package net.sdruskat.blog.randomcolours;
 
 import java.util.Random;
 import org.eclipse.swt.graphics.RGB;
@@ -32,7 +32,7 @@ import org.eclipse.swt.graphics.RGB;
 public class RandomRGBGenerator {
 	
 	/**
-	 * Default float for the hue value, tested against in {@link net.sdruskat.randomcolours.RandomRGBGenerator#calculateGoldenRatioHue(float)}.
+	 * Default float for the hue value, tested against in {@link net.sdruskat.blog.randomcolours.RandomRGBGenerator#calculateGoldenRatioHue(float)}.
 	 */
 	private static float goldenRatioFloatForH = -1;
 	
