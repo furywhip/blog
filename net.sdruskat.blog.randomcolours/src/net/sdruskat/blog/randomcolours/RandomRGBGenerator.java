@@ -15,16 +15,24 @@
  */
 package net.sdruskat.blog.randomcolours;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
 import org.eclipse.swt.graphics.RGB;
 
 /**
  * 
  * This class can be used to create (pseudo-)randomly generated {@link RGB} objects.
  * 
+ * Note that this class is stateful, i.e., every call to {@link #calculateGoldenRatioHue(float)} 
+ * (publicly accessible only via {@link #goldenRatioHsvToRgb(float, float, float)})
+ * changes {@link #goldenRatioFloatForH}. Therefore, if a returned {@link RGB} object n is not
+ * used, n+1 is not golden ration-spaced from n-1.
+ * 
  * The implementation of the golden ratio-spaced hue value calculation is based on the
  * blog post <a href="http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/">&quot;How to Generate Random Colors Programmatically&quot;</a> by <i>Martin Ankerl</i>
- * (http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/), last accessed on 01 April 2014 (no joke!). 
+ * (http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/), last accessed on 01 April 2014 (no joke!).
  *  
  * @author Stephan Druskat
  * 
@@ -42,7 +50,7 @@ public class RandomRGBGenerator {
 	 * @param h The hue float that is tested against the default float and used for hue randomization. This should be a {@link Random#nextFloat()}. 
 	 * @return A float that is golden ratio-spaced to the last calculated float.
 	 */
-	private float calculateGoldenRatioHue(float h) {
+	protected float calculateGoldenRatioHue(float h) {
 		double goldenRatioConjugate = 0.618033988749895;
 		if (goldenRatioFloatForH  == -1) {
 			goldenRatioFloatForH = h;
@@ -128,6 +136,22 @@ public class RandomRGBGenerator {
 		}
 		// Uses simple casting, could use rounding (Math.round()) as well before casting.
 		return new RGB((int)(r * 256), (int)(g * 256), (int)(b * 256));
+	}
+	
+	/**
+	 * Creates a list of n golden ratio-spaced random {@link RGB} objects.
+	 * 
+	 * @param numberOfRgbObjects
+	 * @param saturation
+	 * @param value
+	 * @return randomGoldenRatioRgbList An ArrayList<RGB> containing numberOfRgbObjects {@link RGB} objects
+	 */
+	public List<RGB> createRandomGoldenRationRgbList(int numberOfRgbObjects, float saturation, float value) {
+		List<RGB> randomGoldenRatioRgbList = new ArrayList<RGB>();
+		for (int i = 0; i < numberOfRgbObjects; i++) {
+			randomGoldenRatioRgbList.add(goldenRatioHsvToRgb(new Random().nextFloat(), saturation, value));
+		}
+		return randomGoldenRatioRgbList;
 	}
 
 }

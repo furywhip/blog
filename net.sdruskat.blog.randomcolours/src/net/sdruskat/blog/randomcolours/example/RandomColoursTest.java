@@ -15,6 +15,8 @@
  */
 package net.sdruskat.blog.randomcolours.example;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import net.sdruskat.blog.randomcolours.RandomRGBGenerator;
@@ -50,14 +52,18 @@ public class RandomColoursTest {
 	public static void main(String[] args) {
 		display = new Display();
 		shell = new Shell(display);
+		shell.setText("\"Ran\" = Simple random, \"HSV\" = HSV Random Hue, \"Gol\" = golden ratio-spaced random hue");
 		
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 27;
 		shell.setLayout(layout);
 		
-		produceLabels(RandomColoursTest.SIMPLE_RANDOM);
-		produceLabels(RandomColoursTest.RANDOM_HSV);
-		produceLabels(RandomColoursTest.GOLDEN_RATIO_HSV);
+		GridData gridData = new GridData();
+		
+		produceLabels(RandomColoursTest.SIMPLE_RANDOM, gridData);
+		produceLabels(RandomColoursTest.RANDOM_HSV, gridData);
+		produceLabels(RandomColoursTest.GOLDEN_RATIO_HSV, gridData);
+		produceLabelsFromList(gridData);
 		
 		shell.pack();
 		shell.open();
@@ -69,8 +75,26 @@ public class RandomColoursTest {
 		display.dispose();
 	}
 
-	private static void produceLabels(String randomType) {
-		GridData gridData = new GridData();
+	private static void produceLabelsFromList(GridData gridData) {
+		RandomRGBGenerator gen = new RandomRGBGenerator();
+		List<RGB> list = gen.createRandomGoldenRationRgbList(44, 0.5f, 0.95f);
+		Label mainLabel = new Label(shell, SWT.NONE);
+		mainLabel.setLayoutData(gridData);
+		mainLabel.setText(list.size() + "x");
+		for (Iterator<RGB> iterator = list.iterator(); iterator.hasNext();) {
+			RGB rgb = (RGB) iterator.next();
+			Label label = new Label(shell, SWT.CENTER);
+			label.setBackground(new Color(display, rgb));
+			gridData.heightHint = 30;
+			gridData.widthHint = 30;
+			label.setLayoutData(gridData);
+			label.setText(String.valueOf(list.indexOf(rgb) + 1));
+		}
+
+		
+	}
+
+	private static void produceLabels(String randomType, GridData gridData) {
 		Label mainLabel = new Label(shell, SWT.NONE);
 		mainLabel.setLayoutData(gridData);
 		mainLabel.setText(randomType.substring(0, 3));
